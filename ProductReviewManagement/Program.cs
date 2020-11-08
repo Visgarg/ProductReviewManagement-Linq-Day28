@@ -60,8 +60,18 @@ namespace ProductReviewManagement
             //productManagement.SkippingRecords(productReviewList);
             //UC9
             DataTableForProductManagement dataTableForProductManagement = new DataTableForProductManagement();
+            //dataTableForProductManagement.AddDataTable();
+            //dataTableForProductManagement.CallForRetrievingData();
+            //UC10
+            //productManagement.AverageRatingForUserId(productReviewList);
+            //dataTableForProductManagement.AddDataTable();
+            //dataTableForProductManagement.CallForAverageRatings();
+            //UC11
+            //dataTableForProductManagement.AddDataTable();
+            //dataTableForProductManagement.CallForReviewRetrieval();
+            //UC12
             dataTableForProductManagement.AddDataTable();
-            dataTableForProductManagement.CallForRetrievingData();
+            dataTableForProductManagement.CallForSpecificUserId();
 
 
         }

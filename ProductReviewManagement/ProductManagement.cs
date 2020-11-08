@@ -112,5 +112,70 @@ namespace ProductReviewManagement
                 Console.WriteLine("ProductId:-" +list.Field<string>("productId") + " UserId:-" + list.Field<string>("userId") + " Ratings:-" + list.Field<string>("ratings") + " Review:-" + list.Field<string>("reviews") + " IsLike:-" + list.Field<string>("isLike"));
             }
         }
+        /// <summary>
+        /// Averages the rating for user identifier. UC10
+        /// </summary>
+        /// <param name="productReviewList">The product review list.</param>
+        public void AverageRatingForUserId(List<ProductReview> productReviewList)
+        {
+            var recordData= productReviewList.GroupBy(r => r.UserId).Select(r => new { userId= r.Key,averageRatings=r.Average(x=>x.Rating)});
+            var recordedData = from products in productReviewList
+                               group products by products.UserId into p
+                               select new { userId = p.Key, averageRatings = p.Average(x => x.Rating) };
+
+            foreach (var list in recordData)
+            {
+                Console.WriteLine("user Id:-" + list.userId + " Ratings :" + list.averageRatings);
+            }
+
+        }
+        /// <summary>
+        /// Averages the rating for user identifier using data table. Uc10
+        /// </summary>
+        /// <param name="table">The table.</param>
+        public void AverageRatingForUserIDUsingDataTable(DataTable table)
+        {
+            //field for data table always takes string as data type and then casted to integer for ratings here
+            //used lambda syntax
+            var recordData = table.AsEnumerable().GroupBy(r => r.Field<string>("userId")).Select(r => new { userid = r.Key, averageRatings = r.Average(x => Convert.ToInt32(x.Field<string>("ratings")))});
+            foreach (var list in recordData)
+            {
+                Console.WriteLine("user Id:-" + list.userid + " Ratings :" + list.averageRatings);
+            }
+        }
+        /// <summary>
+        /// Reviews message retrieval for average. UC11
+        /// </summary>
+        /// <param name="table">The table.</param>
+        public void ReviewMessageRetrieval(DataTable table)
+        {
+            var recordData = table.AsEnumerable().Where(r => r.Field<string>("reviews") == "Average");
+            var recordedData = from products in table.AsEnumerable()
+                               where products.Field<string>("reviews") == "Average"
+                               select products;
+            foreach (var list in recordData)
+            {
+                //field datatype is string here for every column
+                Console.WriteLine("ProductId:-" + list.Field<string>("productId") + " UserId:-" + list.Field<string>("userId") + " Ratings:-" + list.Field<string>("ratings") + " Review:-" + list.Field<string>("reviews") + " IsLike:-" + list.Field<string>("isLike"));
+            }
+
+        }
+        /// <summary>
+        /// Selects the records for user identifier. UC12
+        /// </summary>
+        /// <param name="table">The table.</param>
+        public void SelectRecordsForUserId(DataTable table)
+        {
+            var recordData = table.AsEnumerable().Where(r => Convert.ToInt32(r.Field<string>("userid")) == 10).OrderBy(r => Convert.ToInt32(r.Field<string>("ratings")));
+            var recordedData = from products in table.AsEnumerable()
+                               where Convert.ToInt32(products.Field<string>("userid")) == 10
+                               orderby (Convert.ToInt32(products.Field<string>("ratings")))
+                               select products;
+            foreach (var list in recordedData)
+            {
+                //field datatype is string here for every column
+                Console.WriteLine("ProductId:-" + list.Field<string>("productId") + " UserId:-" + list.Field<string>("userId") + " Ratings:-" + list.Field<string>("ratings") + " Review:-" + list.Field<string>("reviews") + " IsLike:-" + list.Field<string>("isLike"));
+            }
+        }
     }
 }
