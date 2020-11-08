@@ -112,5 +112,36 @@ namespace ProductReviewManagement
                 Console.WriteLine("ProductId:-" +list.Field<string>("productId") + " UserId:-" + list.Field<string>("userId") + " Ratings:-" + list.Field<string>("ratings") + " Review:-" + list.Field<string>("reviews") + " IsLike:-" + list.Field<string>("isLike"));
             }
         }
+        /// <summary>
+        /// Averages the rating for user identifier. UC10
+        /// </summary>
+        /// <param name="productReviewList">The product review list.</param>
+        public void AverageRatingForUserId(List<ProductReview> productReviewList)
+        {
+            var recordData= productReviewList.GroupBy(r => r.UserId).Select(r => new { userId= r.Key,averageRatings=r.Average(x=>x.Rating)});
+            var recordedData = from products in productReviewList
+                               group products by products.UserId into p
+                               select new { userId = p.Key, averageRatings = p.Average(x => x.Rating) };
+
+            foreach (var list in recordData)
+            {
+                Console.WriteLine("user Id:-" + list.userId + " Ratings :" + list.averageRatings);
+            }
+
+        }
+        /// <summary>
+        /// Averages the rating for user identifier using data table. Uc10
+        /// </summary>
+        /// <param name="table">The table.</param>
+        public void AverageRatingForUserIDUsingDataTable(DataTable table)
+        {
+            //field for data table always takes string as data type and then casted to integer.
+            //used lambda syntax
+            var recordData = table.AsEnumerable().GroupBy(r => r.Field<string>("userId")).Select(r => new { userid = r.Key, averageRatings = r.Average(x => Convert.ToInt32(x.Field<string>("ratings")))});
+            foreach (var list in recordData)
+            {
+                Console.WriteLine("user Id:-" + list.userid + " Ratings :" + list.averageRatings);
+            }
+        }
     }
 }
