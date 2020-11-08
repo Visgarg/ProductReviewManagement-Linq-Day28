@@ -57,7 +57,7 @@ namespace ProductReviewManagement
             //UC5
             //productManagement.retrieveProductIDandreview(productReviewList);
             //UC6
-            productManagement.SkippingRecords(productReviewList);
+            //productManagement.SkippingRecords(productReviewList);
             //
 
 
