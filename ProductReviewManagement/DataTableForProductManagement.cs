@@ -46,6 +46,10 @@ namespace ProductReviewManagement
         {
             productManagement.AverageRatingForUserIDUsingDataTable(table);
         }
+        public void CallForReviewRetrieval()
+        {
+            productManagement.ReviewMessageRetrieval(table);
+        }
         
     }
 

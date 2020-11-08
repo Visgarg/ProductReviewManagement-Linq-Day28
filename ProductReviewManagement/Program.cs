@@ -64,8 +64,12 @@ namespace ProductReviewManagement
             //dataTableForProductManagement.CallForRetrievingData();
             //UC10
             //productManagement.AverageRatingForUserId(productReviewList);
+            //dataTableForProductManagement.AddDataTable();
+            //dataTableForProductManagement.CallForAverageRatings();
+            //UC11
             dataTableForProductManagement.AddDataTable();
-            dataTableForProductManagement.CallForAverageRatings();
+            dataTableForProductManagement.CallForReviewRetrieval();
+
 
 
         }
