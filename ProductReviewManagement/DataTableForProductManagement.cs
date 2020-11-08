@@ -8,16 +8,17 @@ namespace ProductReviewManagement
 {
     class DataTableForProductManagement
     {
+        DataTable table = new DataTable();
         /// <summary>
         /// Adds the data table for product management 
         /// </summary>
         public void AddDataTable()
         {
-            DataTable table = new DataTable();
+
             table.Columns.Add("productId");
-            table.Columns.Add("UserId");
-            table.Columns.Add("Ratings");
-            table.Columns.Add("Reviews");
+            table.Columns.Add("userId");
+            table.Columns.Add("ratings");
+            table.Columns.Add("reviews");
             table.Columns.Add("isLike");
             table.Rows.Add("1", "1", "5", "Good", true);
             table.Rows.Add("2", "3", "4", "Good", true);
@@ -32,6 +33,16 @@ namespace ProductReviewManagement
             table.Rows.Add("11", "3", "3", "Average", true);
             table.Rows.Add("12", "1", "3", "Average", false);
         }
+        /// <summary>
+        /// Calls for retrieving data.
+        /// </summary>
+        public void CallForRetrievingData()
+        {
+            //CALLING  retrieving records method from product management
+            ProductManagement productManagement = new ProductManagement();
+            productManagement.RetrievingRecords(table);
+        }
         
     }
+
 }
