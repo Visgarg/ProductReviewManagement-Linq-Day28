@@ -94,5 +94,23 @@ namespace ProductReviewManagement
             }
 
         }
+        /// <summary>
+        /// Retrievings the records.
+        /// </summary>
+        /// <param name="table">The table.</param>
+        public void RetrievingRecords(DataTable table)
+        {
+            //in where condition, need to cast is like value to string
+            //query syntax
+            var recordData = from products in table.AsEnumerable()
+                             where (products.Field<string>("isLike") == true.ToString())
+                             select products;
+            //lambda syntax
+            var recordedData = table.AsEnumerable().Where(r=>r.Field<string>("isLike") == true.ToString());
+            foreach (var list in recordedData)
+            {
+                Console.WriteLine("ProductId:-" +list.Field<string>("productId") + " UserId:-" + list.Field<string>("userId") + " Ratings:-" + list.Field<string>("ratings") + " Review:-" + list.Field<string>("reviews") + " IsLike:-" + list.Field<string>("isLike"));
+            }
+        }
     }
 }
